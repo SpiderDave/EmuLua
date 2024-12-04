@@ -1,0 +1,134 @@
+// Don't modify this file; Instead make a file config.txt with just the items you want.
+
+// Graphics mode.  gd assumes the gd library is present, allowing .png loading.
+//graphics_mode=gd
+
+// Setting to false disables music
+music=true
+
+// Setting to false disables sound played using external methods.
+externalSound=true
+
+// Allow debugging stuff.  Setting this to false removes the select menu.
+debug = false
+
+// Allow new debug menu.  Press select while on the pause menu to access.
+debugMenu = false
+
+// display hitboxes
+hitboxes=false
+
+// Turn on cheats
+//cheats=true
+
+//leftClick = warp
+//leftClick = item
+
+// Enable candle editing mode.  Double-click to place a candle.
+editCandles = false
+
+// Set the item to place in candle editing mode.  If ommited, defaults to heart.
+//candleItem = Gold
+
+// turn on quick day/night transition
+quickDayNight=true
+
+// fix so you don't get knocked off stairs (needs work)
+stairsFix=false
+
+// turn on stuff to test stats and damage specifically
+testStats = false
+
+// Fix it so your jumping x or y velocity doesn't change based 
+// on the velocity of a moving platform.
+platformVelocityFix=true
+
+// Make the merchant stop moving around.
+stationaryMerchant=true
+
+// Replace Medusa Heads with custom object Medusa Heads (needs work).
+replaceMedusaHeads=true
+
+// Use new pattern for floating eyes
+floatingEyes = true
+
+// Use new pattern for ghosts (currently broken)
+ghosts = false
+
+// Use new pattern for Death
+deathAI = true
+
+// Use new pattern for Dracula (currently broken)
+draculaAI = false
+
+// Change jump animation and velocity.  It's buggy, don't enable it.
+jumpTweak = false
+
+// Test endings; set to 1, 2, or 3 and the ending will play when the script is loaded.
+//testEnding = 2
+
+// Show relic icons and if they're turned on in the HUD. The HUD is a little busy with this on.
+showRelicsInHUD=false
+
+// Amount of lives to start with
+lives=3
+
+// Save lives with game save.  If set to false, the player will get starting amount of lives when continuing.
+saveLives=false
+
+// Bat mode flight is wavy.  It's can be annoying, especially with the scrolling.
+batWave=false
+
+// Remove all enemies
+noEnemies=false
+
+// Get items when script is activated and not paused.
+//getItems=Simon's Plate, Morning Star
+
+// Equip items when script is activated and not paused.
+//equip=Simon's Plate, Morning Star
+
+// Auto sort inventory by type
+sortInventory=true
+
+// candles drop hearts that replace with real hearts (buggy)
+candlesRealHearts=false
+
+// Amount of hearts to start with
+hearts=5
+
+// Maximum hearts
+maxHearts = 99
+
+// Reduce heart cost for special weapons
+//reduceHeartCost = 2
+
+// Lighting and effects quality preset.
+// values are high, medium, low, custom.
+// high: Candles have larger secondary light circle.
+// low: Disable light radius for candles.
+qualityPreset=high
+
+// If set to true, juggle bones with the whip instead of killing them.
+boneJuggle = false
+
+// Set to true to perform a md5 check on the rom.  This will help make sure you 
+// have the correct one (No-Intro).
+md5=false
+
+// Set to true to use non-blinking cursors.
+//noBlinkCursor=true
+
+// Set to true to ignore the version warning when using
+// an older build.  This isn't recommended, as the script
+// breaks in various ways with the current 2.2.3.
+//ignoreVersionWarning=true
+
+// Controls
+button_confirm = B
+button_cancel = A
+
+// re-fight bosses if true
+//refightBosses=true
+
+1upChance = 10000
