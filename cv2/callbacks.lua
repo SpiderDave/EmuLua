@@ -120,6 +120,7 @@ registerExec(0xda69,7,1,"onSubWeaponBreak")
 registerExec(0xd858,7,1,"onSubWeaponCost")
 registerExec(0x817f,1,1,"onEnemyCreated")
 registerExec(0xc2d0+2,7,1,"onContinueScreen")
+registerExec(0xc30c,7,1,"onPasswordScreen")
 registerExec(0x87a4+3,1,1,"onMessage")
 registerExec(0x884f,1,1,"onSetPlayerFacingWhenHit")
 registerExec(0xd37e,7,1,"onSetPlayerXVelocityWhenHit")
@@ -465,6 +466,17 @@ end
 function _onContinueScreen(address,len,t)
     if type(onContinueScreen)=="function" then onContinueScreen() end
 end
+
+function _onPasswordScreen(address,len,t)
+    if type(onPasswordScreen)=="function" then
+        local mode1 = memory.readbyte(0x0018)
+        local mode2 = memory.readbyte(0x0019)
+        mode1, mode2 = onPasswordScreen(mode1, mode2)
+        if mode1 then memory.writebyte(0x0018, mode1) end
+        if mode2 then memory.writebyte(0x0019, mode2) end
+    end
+end
+
 
 -- note, cancel only works for automatic messages
 function _onMessage(address,len,t)

@@ -76,6 +76,9 @@ lives=3
 // Save lives with game save.  If set to false, the player will get starting amount of lives when continuing.
 saveLives=false
 
+// If set to true, the continue screen is replaced with a simple game over.
+noContinue=false
+
 // Bat mode flight is wavy.  It's can be annoying, especially with the scrolling.
 batWave=false
 

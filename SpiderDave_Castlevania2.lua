@@ -2954,7 +2954,9 @@ function onPrintTitleText(c,address, index)
         -- ??
     else
         --spidey.message("%04x %02x %02x",address,c,index)
+        --emu.pause()
     end
+    
     return c
 end
 
@@ -3017,11 +3019,19 @@ end
 
 -- set mode to 0 on continue screen which freezes it.
 function onContinueScreen()
-    memory.writebyte(0x19,0x00)
-    -- reset counter
-    if memory.readword(0x7410)==0 then
-        memory.writeword(0x7410,0x190)
+    -- replace continue/password with game over
+    if config.noContinue then
+        memory.writebyte(0x19,0x00)
+        -- reset counter
+        if memory.readword(0x7410)==0 then
+            memory.writeword(0x7410,0x190)
+        end
     end
+end
+
+function onPasswordScreen()
+    -- replace password with quit
+    return 0, 0
 end
 
 -- force continue
@@ -4771,8 +4781,6 @@ memory.registerexec(0xc85a,1, function()
     -- This fixes the bug where it removes "GAME START" text when loading (I hope).
     if game.modeMain == 5 and (game.mode2 == 1 or game.mode2 == 2) then return end
     
-    --spidey.message("modeMain=%02x mode=%02x mode2=%02x", game.modeMain, game.mode, game.mode2)
-    
     if x>=0x13 and x<=0x16 then
         local i = x-0x13+1
         a = objects.player.palette[i]
@@ -5190,7 +5198,7 @@ function spidey.update(inp,joy)
     game.mode2=memory.readbyte(0x00aa)
     game.modeCursor=memory.readbyte(0x23) -- start or continue
     game.modeCounter =memory.readbyte(0x002a)
-    --game.resetCounter = memory.readword(0x7410)
+    game.resetCounter = memory.readword(0x7410)
     
     game.paused = cv2.paused()
     pausemenu = cv2.pauseMenu()
@@ -5346,20 +5354,6 @@ function spidey.update(inp,joy)
             end
         end
     end
-    
---    if game.mode==0x00 and game.resetCounter > 0 then
---        spidey.message("%02x",game.resetCounter or 0)
---        game.resetCounter = game.resetCounter - 1
---        memory.writeword(0x7410, game.resetCounter)
---        gui.drawbox(0,0,spidey.screenWidth-1,spidey.screenHeight-1,"black","black")
---        drawfont(8*11,8*13,font[current_font], "GAME OVER" )
---        if game.resetCounter == 0 or (game.resetCounter < 70 and joy[1].start_press)then
---            game.resetCounter = 0
---            memory.writeword(0x7410, game.resetCounter)
---            emu.softreset()
---            emu.message("") -- suppress the "reset" message
---        end
---    end
     
     if game.mode==0x04 then
         --gui.text(20,50,"mode screen")
@@ -5627,8 +5621,8 @@ function spidey.update(inp,joy)
          end
     end
     
-    if game.mode==0x00 and game.resetCounter > 0 then
-        spidey.message("%02x",game.resetCounter or 0)
+    if config.noContinue and game.mode==0x00 and game.resetCounter > 0 then
+        --spidey.message("%02x",game.resetCounter or 0)
         game.resetCounter = game.resetCounter - 1
         memory.writeword(0x7410, game.resetCounter)
         gui.drawbox(0,0,spidey.screenWidth-1,spidey.screenHeight-1,"black","black")
@@ -5639,6 +5633,8 @@ function spidey.update(inp,joy)
             emu.softreset()
             emu.message("") -- suppress the "reset" message
         end
+    elseif (not config.noContinue) and game.modeMain == 0x07 then
+        drawfont(8*13,8*20,font[current_font], "QUIT    " )
     end
     
     if action then
