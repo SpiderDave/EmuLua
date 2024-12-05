@@ -4,6 +4,7 @@ cv2/callbacks.lua
 cv2/callbacksPrototype.lua
 cv2/candles.lua
 cv2/cv2data.lua
+cv2/cv2lib.lua
 cv2/hitboxes.lua
 cv2/items.lua
 cv2/md5.lua
