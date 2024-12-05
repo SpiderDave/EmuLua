@@ -1,4 +1,4 @@
-readme.md
+README.md
 SpiderDave_Castlevania2.lua
 cv2/callbacks.lua
 cv2/callbacksPrototype.lua
