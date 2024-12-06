@@ -158,3 +158,10 @@ Spidey/util.lua
 Spidey/tools/NirCmd/NirCmd.chm
 Spidey/tools/NirCmd/nircmd.exe
 Spidey/tools/NirCmd/nircmdc.exe
+Spidey/config.lua
+Spidey/deque.lua
+Spidey/hexgrid.gd
+Spidey/hexgrid.png
+Spidey/PowerBlade.gfx
+Spidey/Power_Blade.default.dat
+Spidey/timer.lua
