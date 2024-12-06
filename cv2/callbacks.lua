@@ -180,6 +180,10 @@ registerExec(0xdf4d,7,1,"onDestroyObject")
 
 registerExec(0xdeca+2,7,1,"onSetPlayerState")
 
+registerExec(0xf042+2,7,1,"onGetPauseItems")
+--registerExec(0xf335+2,7,1,"onGetPauseEquip")
+registerExec(0xf31c+2,7,1,"onGetPauseEquip")
+
 -- Here we make better callbacks out of the callbacks.  It's callbacks all the way down!
 
 function _onWalkSpeedRight(address,len,t)
@@ -1047,3 +1051,20 @@ function _onExitSubMenu(address,len,t)
         end
     end
 end
+
+function _onGetPauseItems(address,len,t)
+    if type(onGetPauseItems)=="function" then
+        local a = onGetPauseItems(t.a)
+        if a then memory.setregister("a", a)
+        end
+    end
+end
+
+function _onGetPauseEquip(address,len,t)
+    if type(onGetPauseEquip)=="function" then
+        local a = onGetPauseEquip(t.a)
+        if a then memory.setregister("a", a)
+        end
+    end
+end
+

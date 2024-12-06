@@ -179,6 +179,7 @@ game.map.visible=false
 game.saveSlot = 1
 game.romUndo = game.romUndo or {index={}}
 game.resetCounter=0
+game.hideHudCounter=0
 game.showSaveMenu = false
 game.saveCursor = 0
 
@@ -1501,7 +1502,7 @@ function equipItem(itemName)
 end
 
 function interactItem(item)
-    spidey.message("interact")
+    --spidey.message("interact")
     if item.type == "save crystal" then
         --if showMessage then createItemPopUp("Save") end
         cv2.pause(4) -- pause game with special value of 4
@@ -2474,6 +2475,8 @@ end
 
 
 function drawHUD()
+        if game.hideHudCounter > 0 then return end
+        
         --displayarea = locations.getAreaName(area1,area2,area3,areaFlags)
         displayarea = cv2:getAreaName()
         
@@ -3031,6 +3034,7 @@ end
 
 function onPasswordScreen()
     -- replace password with quit
+    game.hideHudCounter = 20
     return 0, 0
 end
 
@@ -3114,9 +3118,16 @@ end
 function onSetWeaponCursor(w, side)
     -- This effectively cancels weapon cursor movement.
     -- Fixes the stuck menu bug.
+    -- NOTE: nope, still bugged
     return 1
 end
 
+--function onGetPauseItems(n)
+--    return 0xff
+--end
+--function onGetPauseEquip(n)
+--    return 0xff
+--end
 
 --memory.registerexec(0x87a4+3,1, function()
 --    local a,x,y,s,p,pc=memory.getregisters()
@@ -5360,7 +5371,10 @@ function spidey.update(inp,joy)
         
         if game.modeCursor == 1 or true then
         --if game.modeCursor == 1 then
-            drawfont(8*12,8*19,font[current_font], "Continue "..game.saveSlot)
+            
+            drawfont(8*12,8*16+1,font[current_font], "New Game  ")
+            
+            drawfont(8*12,8*19+1,font[current_font], "Continue "..game.saveSlot)
             game.saveCache = game.saveCache or {}
             game.saveCache[game.saveSlot] = game.saveCache[game.saveSlot] or (getGameSaveData(game.saveSlot) or "empty")
             local s = game.saveCache[game.saveSlot]
@@ -5619,6 +5633,13 @@ function spidey.update(inp,joy)
              --objects.player.pendant = (locations.getAreaName(area1,area2,area3) == "Joma Marsh" and objects.player.accessory == items.index["Pendant"] then
              objects.player.pendant = (objects.player.accessory == items.index["Pendant"])
          end
+    end
+    
+    if game.hideHudCounter > 0 then
+        if spidey.debug.enabled then
+            spidey.message("%02x",game.hideHudCounter or 0)
+        end
+        game.hideHudCounter = game.hideHudCounter - 1
     end
     
     if config.noContinue and game.mode==0x00 and game.resetCounter > 0 then
