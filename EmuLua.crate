@@ -1,0 +1,13 @@
+# Rudimentary "SpiderCrate package manager" format.
+# for use with EmuLua Launcher
+packages:
+  - name: cv2improvement
+    longName: Castlevania 2 Improvement
+    author: SpiderDave
+    github:
+      user: SpiderDave
+      repo: EmuLua
+      branch: refs/heads/main
+      listFile: cv2/files.txt
+    description: Extensive script for Castlevania 2 with many changes
+    url: https://spiderdave.me/emulua.php?c=16-Castlevania-2-Improvement#c16
