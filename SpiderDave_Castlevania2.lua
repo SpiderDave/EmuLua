@@ -829,7 +829,7 @@ local itemList = {}
 
 
 local ignoreErrors = false
-local useGD = false
+local useGD = true
 
 
 if not rom.writebyte then
