@@ -10,4 +10,5 @@ packages:
       branch: refs/heads/main
       listFile: cv2/files.txt
     description: Extensive script for Castlevania 2 with many changes
+    image: https://i.imgur.com/SqUIHn6.gif
     url: https://spiderdave.me/emulua.php?c=16-Castlevania-2-Improvement#c16
